@@ -189,4 +189,15 @@ gulp.task('css', () => {
     })
 })
 
-gulp.task('default', ['js', 'css'])
+gulp.task('serve', gulp.parallel('css', 'js'), function () {
+
+    browserSync.init({
+        server: "app/"
+    });
+
+    gulp.watch("app/css/*.css", gulp.parallel('css'));
+    gulp.watch("app/js/*.js", gulp.parallel('js'));
+    gulp.watch("app/*.html").on('change', browserSync.reload);
+});
+
+gulp.task('default', gulp.series('serve'));

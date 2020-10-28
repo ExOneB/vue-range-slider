@@ -1,6 +1,6 @@
 /*!
  * vue-range-slider v1.0.3
- * (c) 2016-2019 xwpongithub
+ * (c) 2016-2020 xwpongithub
  * Released under the MIT License.
  */
 
@@ -102,8 +102,6 @@ var EVENT_MOUSE_DOWN = 'mousedown';
 var EVENT_MOUSE_MOVE = 'mousemove';
 var EVENT_MOUSE_UP = 'mouseup';
 var EVENT_MOUSE_LEAVE = 'mouseleave';
-var EVENT_KEY_DOWN = 'keydown';
-var EVENT_KEY_UP = 'keyup';
 var EVENT_RESIZE = 'resize';
 var Slider = {
   name: 'vue-range-slider',
@@ -175,7 +173,7 @@ var Slider = {
       type: [String, Boolean],
       default: 'always',
       validator: function validator(val) {
-        return ['hover', 'always'].indexOf(val) > -1;
+        return ['hover', 'always', false].indexOf(val) > -1;
       }
     },
     // 组件方向
@@ -1172,42 +1170,6 @@ var Slider = {
 
       this.focusFlag = false;
     },
-    handleKeydown: function handleKeydown(e) {
-      if (!this.useKeyboard) {
-        return false;
-      }
-
-      var keyCode = e.which || e.keyCode;
-
-      switch (keyCode) {
-        case 37:
-        case 40:
-          e.preventDefault(); // e.stopPropagation()
-
-          this.keydownFlag = true;
-          this.flag = true;
-          this.changeFocusSlider(this.actionsKeyboard[0]);
-          break;
-
-        case 38:
-        case 39:
-          e.preventDefault(); // e.stopPropagation()
-
-          this.keydownFlag = true;
-          this.flag = true;
-          this.changeFocusSlider(this.actionsKeyboard[1]);
-          break;
-
-        default:
-          break;
-      }
-    },
-    handleKeyup: function handleKeyup() {
-      if (this.keydownFlag) {
-        this.keydownFlag = false;
-        this.flag = false;
-      }
-    },
     changeFocusSlider: function changeFocusSlider(fn) {
       var _this5 = this;
 
@@ -1277,8 +1239,6 @@ var Slider = {
         }
       }
 
-      addEvent(document, EVENT_KEY_DOWN, this.handleKeydown);
-      addEvent(document, EVENT_KEY_UP, this.handleKeyup);
       addEvent(window, EVENT_RESIZE, this.refresh);
 
       if (this.isRange && this.tooltipMerge) {
@@ -1314,8 +1274,6 @@ var Slider = {
         }
       }
 
-      removeEvent(document, EVENT_KEY_DOWN, this.handleKeydown);
-      removeEvent(document, EVENT_KEY_UP, this.handleKeyup);
       removeEvent(window, EVENT_RESIZE, this.refresh);
 
       if (this.isRange && this.tooltipMerge) {

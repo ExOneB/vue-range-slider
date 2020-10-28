@@ -1049,38 +1049,6 @@ export default {
       }
       this.focusFlag = false
     },
-    handleKeydown(e) {
-      if (!this.useKeyboard) {
-        return false
-      }
-      const keyCode = e.which || e.keyCode
-      switch (keyCode) {
-        case 37:
-        case 40:
-          e.preventDefault()
-          // e.stopPropagation()
-          this.keydownFlag = true
-          this.flag = true
-          this.changeFocusSlider(this.actionsKeyboard[0])
-          break
-        case 38:
-        case 39:
-          e.preventDefault()
-          // e.stopPropagation()
-          this.keydownFlag = true
-          this.flag = true
-          this.changeFocusSlider(this.actionsKeyboard[1])
-          break
-        default:
-          break
-      }
-    },
-    handleKeyup() {
-      if (this.keydownFlag) {
-        this.keydownFlag = false
-        this.flag = false
-      }
-    },
     changeFocusSlider(fn) {
       if (this.isRange) {
         let arr = this.currentIndex.map((index, i) => {
@@ -1141,8 +1109,6 @@ export default {
           addEvent(this.$refs.dot, EVENT_MOUSE_DOWN, this._start)
         }
       }
-      addEvent(document, EVENT_KEY_DOWN, this.handleKeydown)
-      addEvent(document, EVENT_KEY_UP, this.handleKeyup)
       addEvent(window, EVENT_RESIZE, this.refresh)
       if (this.isRange && this.tooltipMerge) {
         addEvent(this.$refs.dot0, transitionEnd, this.handleOverlapTooltip)
@@ -1176,8 +1142,6 @@ export default {
           removeEvent(this.$refs.dot, EVENT_MOUSE_DOWN, this._start)
         }
       }
-      removeEvent(document, EVENT_KEY_DOWN, this.handleKeydown)
-      removeEvent(document, EVENT_KEY_UP, this.handleKeyup)
       removeEvent(window, EVENT_RESIZE, this.refresh)
       if (this.isRange && this.tooltipMerge) {
         removeEvent(this.$refs.dot0, transitionEnd, this.handleOverlapTooltip)
