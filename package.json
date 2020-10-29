@@ -1,6 +1,6 @@
 {
-  "name": "vue-range-component",
-  "version": "1.0.3",
+  "name": "vue-range-component-exoneb",
+  "version": "1.0.4",
   "description": "A range slider component based on vue (Vue滑块组件).",
   "main": "dist/vue-range-slider.js",
   "module": "dist/vue-range-slider.esm.js",
@@ -18,7 +18,7 @@
   "homepage": "https://github.com/xwpongithub/vue-range-slider",
   "repository": {
     "type": "git",
-    "url": "git@github.com:xwpongithub/vue-range-slider.git"
+    "url": "git+ssh://git@github.com/xwpongithub/vue-range-slider.git"
   },
   "browserslist": [
     "iOS >= 7",
@@ -54,5 +54,6 @@
     "kind-of": ">=6.0.3",
     "lodash": ">=4.17.19",
     "dot-prop": ">=4.2.1"
-  }
+  },
+  "dependencies": {}
 }
